@@ -1,0 +1,71 @@
+@startuml
+@startuml
+
+@startuml
+
+interface SistemaOferta {
+    +crearOferta()
+    +editarOferta()
+    +eliminarOferta(): void
+    +obtenerResumen(): void
+}
+
+abstract class Oferta {
+  - id: int
+  - titulo: String
+  - descripcion: String
+  - fechaPublicacion: LocalDate
+  - fechaCierre: LocalDate
+  - nombreUnidad: String
+}
+
+class Usuario {
+  - nombre: String
+  - rut: String
+  - correo: String
+  - contrasena: String
+
+  +autenticar(rut: String, contrasena: String): boolean
+  +editarPerfil(nuevoNombre: String, nuevoCorreo: String): void
+  +verPerfil(): String
+  +cerrarSesion(): void
+}
+
+class Ayudantia {
+  - nombreAsignatura: String
+  - cantidadHoras: int
+  - promedioMinimo: double
+  - tipoAyudantia: String
+}
+
+class Capstone {
+  - fechaInicio: LocalDate
+  - nombreEmpresa: String
+  - nombreGuia: String
+  - tipoProyecto: String
+  - duracionMeses: int
+  - carrerasNecesarias: String
+  - estudiantesMinimos: int
+}
+
+class PracticaPreProfesional {
+  - fechaInicio: LocalDate
+  - nombreEmpresa: String
+  - nombreGuia: String
+  - poseeRemuneracion: boolean
+}
+class SistemaOfertaImplementacion{
+    -SistemaOferta(): sistema
+    +crearOferta()
+    +editarOferta()
+    +eliminarOferta(): void
+    +obtenerResumen(): void
+}
+
+SistemaOferta <|... SistemaOfertaImplementacion
+Oferta <|-- Ayudantia
+Oferta <|-- Capstone
+Oferta <|-- PracticaPreProfesional
+Usuario "1" -- "*" Oferta : gestiona
+
+@enduml
